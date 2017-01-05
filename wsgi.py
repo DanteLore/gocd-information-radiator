@@ -2,10 +2,11 @@ import json
 import os
 from go.go_crazy import GoCrazy
 
-url = os.environ('GOCD_SERVER')
-username = os.environ('GOCD_USER')
-password = os.environ('GOCD_PASSWORD')
+url = os.environ['GOCD_SERVER']
+username = os.environ['GOCD_USER']
+password = os.environ['GOCD_PASSWORD']
 
+print 'Connecting to' + url
 
 def application(env, start_response):
     go = GoCrazy(url, username, password)
