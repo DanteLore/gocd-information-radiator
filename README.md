@@ -15,6 +15,10 @@ $ brew install nginx
 Add config to nginx.conf:
 
 ```
+upstream uwsgicluster {
+    server 127.0.0.1:8081;
+}
+
 server {
    listen 8080;
 
@@ -38,6 +42,9 @@ Note that the nginx (web) server runs on 8080 and forwards requests to /script/*
 
 Run the WSGI server
 
-$ uwsgi --socket 127.0.0.1:8081 --py-autoreload 3 -w wsgi
+Create a `start.sh` script, based on the example included. Set the server URL, username and password. Run it!
+
+$ chmod +x start.sh
+$ ./start.sh
 
 
