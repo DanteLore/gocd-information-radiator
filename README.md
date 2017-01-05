@@ -4,7 +4,7 @@ An information radiator for Thoughtworks Go
 
 ## Setup
 
-This is quite a good explaination of what's going on here
+This is quite a good explanation of what's going on here
 https://www.digitalocean.com/community/tutorials/how-to-deploy-python-wsgi-applications-using-uwsgi-web-server-with-nginx
 
 Install some stuff
@@ -23,7 +23,7 @@ server {
    listen 8080;
 
    location ^~ /  {
-        root /Users/DTAYLOR/Development/gocd-radiator/ui;
+        root /Users/SOMEWHERE/gocd-radiator/ui;
    }
 
    location /script/ {  
@@ -44,7 +44,7 @@ Run the WSGI server
 
 Create a `start.sh` script, based on the example included. Set the server URL, username and password. Run it!
 
+````
 $ chmod +x start.sh
 $ ./start.sh
-
-
+```
