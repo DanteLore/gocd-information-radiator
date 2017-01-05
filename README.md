@@ -1,6 +1,7 @@
 # gocd-information-radiator
 An information radiator for Thoughtworks Go
 
+![GoCD Information Radiator](http://logicalgenetics.com/wp-content/uploads/2017/01/Screenshot-2017-01-05-16.27.47.png)
 
 ## Setup
 
@@ -9,8 +10,10 @@ https://www.digitalocean.com/community/tutorials/how-to-deploy-python-wsgi-appli
 
 Install some stuff
 
+````
 $ sudo pip install uwsgi
 $ brew install nginx
+```
 
 Add config to nginx.conf:
 
