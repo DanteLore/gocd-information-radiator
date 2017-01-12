@@ -18,3 +18,9 @@ def application(env, start_response):
     result = go.get_build_status()
     start_response('200 OK', [('Content-Type', 'text/json')])
     return json.dumps(result)
+
+
+if __name__ == "__main__":
+    go = GoCrazy(url, username, password)
+    result = go.get_build_status()
+    print json.dumps(result)
