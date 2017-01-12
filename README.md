@@ -11,8 +11,11 @@ https://www.digitalocean.com/community/tutorials/how-to-deploy-python-wsgi-appli
 Install some stuff
 
 ````
+$ sudo apt-get install python2.7-dev
+$ sudo apt-get install python-pip
 $ sudo pip install uwsgi
-$ brew install nginx
+$ sudo pip install gocd
+$ sudo apt-get install nginx
 ```
 
 Add config to nginx.conf:
