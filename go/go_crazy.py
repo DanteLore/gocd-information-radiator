@@ -3,10 +3,11 @@ from gocd import Server
 
 
 class GoCrazy:
-    def __init__(self, server, username, password):
+    def __init__(self, server, username, password, disable_ssl_check=True):
 
         # Turn off SSL certificate checking. Bad!
-        ssl._create_default_https_context = ssl._create_unverified_context
+        if disable_ssl_check:
+            ssl._create_default_https_context = ssl._create_unverified_context
 
         self.server = Server(server, username, password)
 
