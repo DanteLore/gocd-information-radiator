@@ -12,6 +12,14 @@
 		from { transform: scale(1) rotate(0deg);}
 		to { transform: scale(1) rotate(360deg);}
 	}
+
+	.nowrap {
+	    white-space: nowrap;
+	}
+
+	.nooverflow {
+        overflow-y: hidden;
+	}
   </style>
 
 	<div class="page-header">
@@ -21,10 +29,10 @@
     <div class="container-fluid">
 		<div class="row">
     		<div class="col-md-3" ng-repeat="tile in tiles | orderBy:'status' | filter:nameFilter">
-                <div ng-class="getPanelClass(tile)">
-                <h5><span ng-class="getGlyphClass(tile)" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;{{ tile.name | limitTo:32 }}{{tile.name.length > 32 ? '...' : ''}} &nbsp; {{ tile.buildCount > 0 ? '(' + tile.buildCount + ')' : ''}} </h5>
-                <p class="panel-body">{{ tile.group }} :: <strong>{{ tile.status }}</strong></p>
-              </div>
+                <div class="nooverflow" ng-class="getPanelClass(tile)">
+                    <h5 class="nowrap"><span ng-class="getGlyphClass(tile)" aria-hidden="true"></span>&nbsp;{{ tile.buildCount > 0 ? '(' + tile.buildCount + ')' : ''}}&nbsp;{{ tile.name | limitTo:32 }}{{tile.name.length > 32 ? '...' : ''}} </h5>
+                    <p class="nowrap" class="panel-body">{{ tile.group }} :: <strong>{{ tile.status }}</strong></p>
+                </div>
         	</div>
     	</div>
     </div>
