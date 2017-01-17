@@ -20,7 +20,7 @@
 
     <div class="container-fluid">
 		<div class="row">
-    		<div class="col-md-4" ng-repeat="tile in tiles | orderBy:'status' | filter:nameFilter">
+    		<div class="col-md-3" ng-repeat="tile in tiles | orderBy:'status' | filter:nameFilter">
                 <div ng-class="getPanelClass(tile)">
                 <h5><span ng-class="getGlyphClass(tile)" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;{{ tile.name | limitTo:32 }}{{tile.name.length > 32 ? '...' : ''}} &nbsp; {{ tile.buildCount > 0 ? '(' + tile.buildCount + ')' : ''}} </h5>
                 <p class="panel-body">{{ tile.group }} :: <strong>{{ tile.status }}</strong></p>

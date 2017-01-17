@@ -6,7 +6,7 @@ class GoCrazy:
     def __init__(self, server, username, password):
 
         # Turn off SSL certificate checking. Bad!
-        # ssl._create_default_https_context = ssl._create_unverified_context
+        ssl._create_default_https_context = ssl._create_unverified_context
 
         self.server = Server(server, username, password)
 
