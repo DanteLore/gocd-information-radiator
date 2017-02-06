@@ -70,4 +70,4 @@ class GoCrazy:
                 self.response_fetched = datetime.utcnow()
             else:
                 self.logger.info("Returning status from cache")
-        return self.response
+            return self.response
