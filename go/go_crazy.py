@@ -1,12 +1,12 @@
 import ssl
 import threading
+import logging
 from gocd import Server
 from datetime import datetime
 
 
 class GoCrazy:
     def __init__(self, server, username, password, disable_ssl_check=True):
-
         # Turn off SSL certificate checking. Bad!
         if disable_ssl_check:
             ssl._create_default_https_context = ssl._create_unverified_context
@@ -16,6 +16,10 @@ class GoCrazy:
         self.response_fetched = datetime.min
         self.response_lock = threading.Lock()
         self.response = ""
+
+        self.logger = logging.getLogger("TESTING")
+        self.logger.setLevel("DEBUG")
+        self.logger.addHandler(logging.StreamHandler())
 
     def get_build_result(self, pipeline):
         history = pipeline.history()
@@ -61,6 +65,9 @@ class GoCrazy:
     def get_build_status(self):
         with self.response_lock:
             if (datetime.utcnow() - self.response_fetched).total_seconds() > 30:
+                self.logger.info("Fetching status from Go Server")
                 self.response = self.fetch_build_status()
                 self.response_fetched = datetime.utcnow()
+            else:
+                self.logger.info("Returning status from cache")
         return self.response
