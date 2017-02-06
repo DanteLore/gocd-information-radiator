@@ -1,5 +1,7 @@
 import ssl
+import threading
 from gocd import Server
+from datetime import datetime
 
 
 class GoCrazy:
@@ -10,6 +12,10 @@ class GoCrazy:
             ssl._create_default_https_context = ssl._create_unverified_context
 
         self.server = Server(server, username, password)
+
+        self.response_fetched = datetime.min
+        self.response_lock = threading.Lock()
+        self.response = ""
 
     def get_build_result(self, pipeline):
         history = pipeline.history()
@@ -32,7 +38,7 @@ class GoCrazy:
         status = pipeline.status().body
         return status['paused']
 
-    def get_build_status(self):
+    def fetch_build_status(self):
         groups = self.server.pipeline_groups().response
         result = []
 
@@ -51,3 +57,10 @@ class GoCrazy:
                 })
 
         return result
+
+    def get_build_status(self):
+        with self.response_lock:
+            if (datetime.utcnow() - self.response_fetched).total_seconds() > 30:
+                self.response = self.fetch_build_status()
+                self.response_fetched = datetime.utcnow()
+        return self.response
