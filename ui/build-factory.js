@@ -29,15 +29,15 @@ angular.module('buildApp').factory('buildFactory', function($http) {
 			badChildren.forEach(function(b) { tiles.push(b) });
 
 			if(goodChildren.length > 1) {
-				var state = goodChildren[0].state;
-				goodChildren.filter(function(b) { return b.state == 'running' }).forEach(function(x) { state = x.state });
+				var groupState = goodChildren[0].state;
+				goodChildren.filter(function(b) { return b.state == 'RUNNING' }).forEach(function(x) { groupState = x.state });
 
 				var tile = {
                         'name': goodChildren[0].group,
                         'group': goodChildren[0].group,
                         'buildCount': goodChildren.length,
                         'status': 'ALL OK',
-                        'state': state
+                        'state': groupState
 				    };
 				tiles.push(tile);
 			}
