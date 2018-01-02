@@ -1,12 +1,12 @@
 import json
 import os
-from go.go_crazy import GoCrazy
+from go_wrapper.gocd_wrapper import GoCdWrapper
 
 url = os.environ['GOCD_SERVER']
 username = os.environ['GOCD_USER']
 password = os.environ['GOCD_PASSWORD']
 disable_ssl = os.getenv('GOCD_DISABLE_SSL_CHECK', False)
-go = GoCrazy(url, username, password, disable_ssl)
+go = GoCdWrapper(url, username, password)
 
 
 def application(env, start_response):
@@ -18,6 +18,6 @@ def application(env, start_response):
 
 
 if __name__ == "__main__":
-    go = GoCrazy(url, username, password)
+    go = GoCdWrapper(url, username, password)
     result = go.get_build_status()
     print json.dumps(result)
