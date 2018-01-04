@@ -4,10 +4,14 @@ import requests
 
 
 class GoCdWrapper:
-    def __init__(self, url, username, password):
+    def __init__(self, url, username, password, filter_groups=None):
         self.url = url
         self.username = username
         self.password = password
+        if filter_groups:
+            self.filter_groups = [fg.lower().strip(' ') for fg in filter_groups.split(',')]
+        else:
+            self.filter_groups = None
 
         self.logger = logging.getLogger("TESTING")
         self.logger.setLevel("DEBUG")
@@ -61,7 +65,12 @@ class GoCdWrapper:
             return None
 
     def get_pipeline_groups(self):
-        return self.fetch('/config/pipeline_groups')
+        groups = self.fetch('/config/pipeline_groups')
+
+        if self.filter_groups:
+            return [g for g in groups if any(fg for fg in self.filter_groups if fg in g['name'].lower())]
+        else:
+            return groups
 
     def fetch_build_status(self):
         groups = self.get_pipeline_groups()
@@ -93,4 +102,3 @@ class GoCdWrapper:
     def get_build_status(self):
         self.logger.info("Fetching status from Go Server")
         return self.fetch_build_status()
-
